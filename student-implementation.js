@@ -57,21 +57,41 @@ function initializeGame() {
  */
 function handleKeyPress(key) {
     // TODO: Check if game is over - if so, return early
+    if (gameOver) return;
     
     // TODO: Handle letter keys (A-Z)
     // HINT: Use regex /^[A-Z]$/ to test if key is a letter
     // HINT: Check if currentGuess.length < WORD_LENGTH before adding
     // HINT: Use getTile() and updateTileDisplay() to show the letter
-    
+    if (/^[A-Z]$/.test(key)) {
+        if (currentGuess.length < WORD_LENGTH) {
+            currentGuess += key;
+            const tile = getTile(currentRow, currentGuess.length - 1);
+            updateTileDisplay(tile, key);
+        }
+    }
+
     // TODO: Handle ENTER key
     // HINT: Check if guess is complete using isGuessComplete()
     // HINT: Call submitGuess() if complete, show error message if not
-    
-    // TODO: Handle BACKSPACE key  
+    else if (key === 'ENTER') {
+        if (isGuessComplete()) {
+            submitGuess();
+        } else {
+            showMessage('Incomplete guess');
+        }
+    }
+
+    // TODO: Handle BACKSPACE key
     // HINT: Check if there are letters to remove
     // HINT: Clear the tile display and remove from currentGuess
-    
-    console.log('Key pressed:', key); // Remove this line when implementing
+    else if (key === 'BACKSPACE') {
+        if (currentGuess.length > 0) {
+            const tile = getTile(currentRow, currentGuess.length - 1);
+            updateTileDisplay(tile, '');
+            currentGuess = currentGuess.slice(0, -1);
+        }
+    }
 }
 
 /**
@@ -87,10 +107,12 @@ function handleKeyPress(key) {
 function submitGuess() {
     // TODO: Validate guess is complete
     // HINT: Use isGuessComplete()
+    if (!isGuessComplete()) return;
     
     // TODO: Validate guess is a real word
     // HINT: Use WordleWords.isValidWord()
     // HINT: Show error message and shake row if invalid
+    
     
     // TODO: Check each letter and get results
     // HINT: Use checkLetter() for each position
