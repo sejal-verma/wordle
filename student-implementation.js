@@ -191,12 +191,12 @@ function checkLetter(guessLetter, position, targetWord) {
         if (char === guessLetter) letterCount++;
     }
     // calculate the kth letter in the current guess
-    for (let i = 0; i < position; i++) {
+    for (let i = 0; i <= position; i++) {
         if (currentGuess[i] === guessLetter) letterCount--;
         
     }
     // absent 
-    if (letterCount <= 0) {
+    if (letterCount < 0) {
         return 'absent';
     } else {
         return 'present';
