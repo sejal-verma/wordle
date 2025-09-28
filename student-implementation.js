@@ -25,7 +25,7 @@
  */
 function initializeGame() {
     // TODO: Reset game state variables
-    currentWord = WordleWords.getRandomWord();  // Set this to a random word
+    currentWord = WordleWords.getRandomWord().toUpperCase();  // Set this to a random word
     currentGuess = '';
     currentRow = 0;
     gameOver = false;
@@ -167,19 +167,33 @@ function submitGuess() {
  */
 function checkLetter(guessLetter, position, targetWord) {
     // TODO: Convert inputs to uppercase for comparison
+    guessLetter = guessLetter.toUpperCase();
     
     // TODO: Check if letter is in correct position
     // HINT: Compare targetWord[position] with guessLetter
+    if (targetWord[position] === guessLetter) {
+        return 'correct';
+    }
     
     // TODO: Check if letter exists elsewhere in target
     // HINT: Use targetWord.includes() or indexOf()
-    
+    if (!targetWord.includes(guessLetter)) {
+        return 'absent';
+    }
+
     // TODO: Handle duplicate letters correctly
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
-    
-    console.log('Checking letter:', guessLetter, 'at position:', position); // Remove this line
-    return 'absent'; // Replace with actual logic
+    let letterCount = 0;
+    for (let char of targetWord) {
+        if (char === guessLetter) letterCount++;
+    }
+    for (let char of currentGuess) {
+        if (char === guessLetter) letterCount--;
+    }
+    if (letterCount < 0) {
+        return 'absent';
+    }  
 }
 
 /**
