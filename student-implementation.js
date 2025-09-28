@@ -193,7 +193,7 @@ function checkLetter(guessLetter, position, targetWord) {
     }
     if (letterCount < 0) {
         return 'absent';
-    }  
+    }  // FINISH IT
 }
 
 /**
@@ -208,11 +208,18 @@ function checkLetter(guessLetter, position, targetWord) {
 function updateGameState(isCorrect) {
     // TODO: Handle win condition
     // HINT: Set gameWon and gameOver flags, call showEndGameModal
-    
-    // TODO: Handle lose condition  
+    if (isCorrect) {
+        gameWon = true;
+        gameOver = true;
+        showEndGameModal(true, currentWord);
+    }
+
+    // TODO: Handle lose condition
     // HINT: Check if currentRow >= MAX_GUESSES - 1
-    
-    console.log('Game state updated. Correct:', isCorrect); // Remove this line
+    if (!isCorrect && currentRow >= MAX_GUESSES - 1) {
+        gameOver = true;
+        showEndGameModal(false, currentWord);
+    }
 }
 
 // ========================================
