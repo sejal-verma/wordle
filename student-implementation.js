@@ -321,14 +321,27 @@ function validateInput(key, currentGuess) {
     
     // TODO: Handle letter keys
     // HINT: Check if currentGuess.length < WORD_LENGTH
-    
+    if (/^[A-Z]$/.test(key)) {
+        if (currentGuess.length >= WORD_LENGTH) {
+            return false;
+        }   
+    }
+
     // TODO: Handle ENTER key
     // HINT: Check if currentGuess.length === WORD_LENGTH
-    
+    else if (key === 'ENTER') {
+        if (currentGuess.length !== WORD_LENGTH) {
+            return false;
+        }
+    }
     // TODO: Handle BACKSPACE key
     // HINT: Check if currentGuess.length > 0
-    
-    console.log('Validating input:', key); // Remove this line
+    else if (key === 'BACKSPACE') {
+        if (currentGuess.length > 0) {
+            return false;
+        }
+    }
+
     return true; // Replace with actual validation logic
 }
 
