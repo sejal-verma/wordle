@@ -153,8 +153,6 @@ function submitGuess() {
     } else if (!gameOver) {
         updateGameState(false);
     }
-    
-    //console.log('Guess submitted:', currentGuess); // Remove this line when implementing
 }
 
 /**
