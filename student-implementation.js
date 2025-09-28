@@ -279,14 +279,19 @@ function showEndGameModal(won, targetWord) {
     // TODO: Create appropriate message based on won parameter
     // HINT: For wins, include number of guesses used
     // HINT: For losses, reveal the target word
+    if (won) {
+        showMessage('Congratulations! You guessed the word "${targetWord}" in ${currentRow + 1} guesses!');
+    } else {
+        showMessage('Game Over! The correct word was "${targetWord}".');
+    }
     
     // TODO: Update statistics
     // HINT: Use updateStats() function
+    updateStats(won, currentRow + 1);
     
     // TODO: Show the modal
     // HINT: Use showModal() function
-    
-    console.log('Showing end game modal. Won:', won, 'Word:', targetWord); // Remove this line
+    showModal();
 }
 
 /**
@@ -301,6 +306,7 @@ function showEndGameModal(won, targetWord) {
  */
 function validateInput(key, currentGuess) {
     // TODO: Return false if game is over
+    if (gameOver) return false;
     
     // TODO: Handle letter keys
     // HINT: Check if currentGuess.length < WORD_LENGTH
