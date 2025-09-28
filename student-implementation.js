@@ -25,7 +25,7 @@
  */
 function initializeGame() {
     // TODO: Reset game state variables
-    currentWord = WordleWords.getRandomWord().toUpperCase();  // Set this to a random word
+    currentWord = 'POINT'//WordleWords.getRandomWord();  // Set this to a random word
     currentGuess = '';
     currentRow = 0;
     gameOver = false;
@@ -191,12 +191,12 @@ function checkLetter(guessLetter, position, targetWord) {
         if (char === guessLetter) letterCount++;
     }
     // calculate the kth letter in the current guess
-    let k = 0;
     for (let i = 0; i < position; i++) {
-        if (currentGuess[i] === guessLetter) k++;
+        if (currentGuess[i] === guessLetter) letterCount--;
+        
     }
     // absent 
-    if (k > letterCount) {
+    if (letterCount <= 0) {
         return 'absent';
     } else {
         return 'present';
