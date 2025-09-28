@@ -25,7 +25,7 @@
  */
 function initializeGame() {
     // TODO: Reset game state variables
-    currentWord = '';  // Set this to a random word
+    currentWord = WordleWords.getRandomWord();  // Set this to a random word
     currentGuess = '';
     currentRow = 0;
     gameOver = false;
@@ -36,10 +36,12 @@ function initializeGame() {
     
     // TODO: Reset the game board
     // HINT: Use resetBoard()
+    resetBoard();
     
     // TODO: Hide any messages
     // HINT: Use hideModal() and ensure message element is hidden
-    
+    hideModal();
+
     console.log('Game initialized!'); // Remove this line when implementing
 }
 
