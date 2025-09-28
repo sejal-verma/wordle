@@ -244,15 +244,16 @@ function updateGameState(isCorrect) {
  */
 function updateKeyboardColors(guess, results) {
     // TODO: Loop through each letter in the guess
-    
+    for (let i = 0; i < guess.length; i++) {
+        const letter = guess[i];
+        const result = results[i];
+    }
     // TODO: Get the keyboard key element
     // HINT: Use document.querySelector with [data-key="LETTER"]
-    
+    const keyElement = document.querySelector(`[data-key="${letter}"]`);
     // TODO: Apply color with priority system
     // HINT: Don't change green keys to yellow or gray
     // HINT: Don't change yellow keys to gray
-    
-    console.log('Updating keyboard colors for:', guess); // Remove this line
 }
 
 /**
@@ -266,11 +267,14 @@ function updateKeyboardColors(guess, results) {
 function processRowReveal(rowIndex, results) {
     // TODO: Check if all results are 'correct'
     // HINT: Use results.every() method
+    const allCorrect = results.every(result => result === 'correct');
     
     // TODO: If all correct, trigger celebration
     // HINT: Use celebrateRow() function
+    if (allCorrect) {
+        celebrateRow(rowIndex);
+    }
     
-    console.log('Processing row reveal for row:', rowIndex); // Remove this line
 }
 
 /**
