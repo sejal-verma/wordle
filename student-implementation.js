@@ -150,7 +150,7 @@ function submitGuess() {
     if (!gameOver && hasGuessesLeft()) {
         currentRow++;
         currentGuess = '';
-    } else if (!gameOver) {
+    } else {
         updateGameState(false);
     }
 }
