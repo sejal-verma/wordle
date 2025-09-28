@@ -147,7 +147,7 @@ function submitGuess() {
     
     // TODO: Move to next row if game continues
     // HINT: Increment currentRow and reset currentGuess
-    if (!gameOver && currentRow < MAX_GUESSES - 1) {
+    if (!gameOver && hasGuessesLeft()) {
         currentRow++;
         currentGuess = '';
     } else if (!gameOver) {
