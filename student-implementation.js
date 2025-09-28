@@ -184,16 +184,23 @@ function checkLetter(guessLetter, position, targetWord) {
     // TODO: Handle duplicate letters correctly
     // This is the most challenging part - you may want to implement
     // a more sophisticated algorithm that processes the entire word
+
+    // count how many letters are in the target word
     let letterCount = 0;
     for (let char of targetWord) {
         if (char === guessLetter) letterCount++;
     }
-    for (let char of currentGuess) {
-        if (char === guessLetter) letterCount--;
+    // calculate the kth letter in the current guess
+    let k = 0;
+    for (let i = 0; i < position; i++) {
+        if (currentGuess[i] === guessLetter) k++;
     }
-    if (letterCount < 0) {
+    // absent 
+    if (k > letterCount) {
         return 'absent';
-    }  // FINISH IT
+    } else {
+        return 'present';
+    }
 }
 
 /**
