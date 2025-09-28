@@ -112,28 +112,49 @@ function submitGuess() {
     // TODO: Validate guess is a real word
     // HINT: Use WordleWords.isValidWord()
     // HINT: Show error message and shake row if invalid
-    
+    if (!WordleWords.isValidWord(currentGuess)) {
+        showMessage('Not a real word');
+        shakeRow(currentRow);
+        return;
+    }
     
     // TODO: Check each letter and get results
     // HINT: Use checkLetter() for each position
     // HINT: Store results in an array
+    const results = [];
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        results.push(checkLetter(currentGuess[i], i, currentWord));
+    }
     
     // TODO: Update tile colors immediately
     // HINT: Loop through results and use setTileState()
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        const tile = getTile(currentRow, i);
+        setTileState(tile, results[i]);
+    }
     
     // TODO: Update keyboard colors
     // HINT: Call updateKeyboardColors()
+    updateKeyboardColors(currentGuess, results);
     
     // TODO: Check if guess was correct
     // HINT: Compare currentGuess with currentWord
-    
+    if (currentGuess === currentWord) {
+        updateGameState(true);
+    }   
     // TODO: Update game state
     // HINT: Call updateGameState()
     
     // TODO: Move to next row if game continues
     // HINT: Increment currentRow and reset currentGuess
+    if (!gameOver && currentRow < MAX_GUESSES - 1) {
+        currentRow++;
+        currentGuess = '';
+    } else if (!gameOver) {
+        updateGameState(false);
+    }
     
-    console.log('Guess submitted:', currentGuess); // Remove this line when implementing
+    //console.log('Guess submitted:', currentGuess); // Remove this line when implementing
 }
 
 /**
